@@ -1,6 +1,5 @@
 // Prisma configuration for migrations and CLI (Prisma 7+)
-// Move connection URL and related settings here when using Prisma Migrate.
-// This file is read by Prisma CLI. Keep sensitive values in environment variables.
+// Using CommonJS (.cjs) so the Prisma CLI can load it without ESM tooling.
 
 module.exports = {
   datasources: {
