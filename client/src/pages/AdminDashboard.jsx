@@ -1,8 +1,15 @@
 export default function AdminDashboard() {
   return (
     <div className="container py-5">
-      <h1>Tableau de bord - Super Administrateur</h1>
-      <p>Page vide. Ajouter composants et widgets selon le cahier des charges.</p>
+      <header className="d-flex align-items-center justify-content-between mb-4">
+        <div>
+          <h1 className="h4 mb-0">SmartPark</h1>
+          <small className="text-muted">Tableau de bord - Super Administrateur</small>
+        </div>
+        <div>
+          <button className="btn btn-outline-secondary">Déconnexion</button>
+        </div>
+      </header>
     </div>
   )
 }

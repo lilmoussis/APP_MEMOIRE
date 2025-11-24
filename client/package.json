@@ -1,10 +1,11 @@
 {
-  "name": "client",
+  "name": "smartpark-client",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "SmartPark - Frontend (React + Vite)",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "live": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
