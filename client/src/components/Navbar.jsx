@@ -2,7 +2,7 @@
  * Composant Navbar (Barre de navigation superieure)
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bell, User, LogOut, Menu } from 'lucide-react';
 import { useAuthStore, useNotificationStore } from '../store';
@@ -13,6 +13,20 @@ export default function Navbar() {
   const { notifications, unreadCount, markAllAsRead } = useNotificationStore();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   const handleLogout = async () => {
     await logout();
@@ -27,7 +41,7 @@ export default function Navbar() {
   };
   
   return (
-    <nav className="navbar-custom">
+    <nav className={`navbar-custom ${isScrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
         <button className="btn btn-link d-lg-none menu-toggle" type="button">
           <Menu size={20} />
@@ -107,6 +121,7 @@ export default function Navbar() {
               </div>
               <div className="user-info d-none d-md-block">
                 <span className="user-name">{user?.firstName || user?.username}</span>
+                {" "}
                 <span className="user-role">{user?.role === 'SUPER_ADMIN' ? 'Super Admin' : 'Gérant'}</span>
               </div>
             </button>
