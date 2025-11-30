@@ -24,11 +24,22 @@ const cardService = {
   },
   
   /**
+   * Alias de getAllCards
+   */
+  async getAll(params = {}) {
+    return this.getAllCards(params);
+  },
+  
+  /**
    * Creer une nouvelle carte
    */
   async createCard(cardData) {
     const response = await apiClient.post(API_CONFIG.ENDPOINTS.CARDS.CREATE, cardData);
     return response.data.data;
+  },
+  
+  async create(cardData) {
+    return this.createCard(cardData);
   },
   
   /**
@@ -39,12 +50,20 @@ const cardService = {
     return response.data.data;
   },
   
+  async update(id, cardData) {
+    return this.updateCard(id, cardData);
+  },
+  
   /**
    * Supprimer une carte
    */
   async deleteCard(id) {
     const response = await apiClient.delete(API_CONFIG.ENDPOINTS.CARDS.BY_ID(id));
     return response.data;
+  },
+  
+  async delete(id) {
+    return this.deleteCard(id);
   },
   
   /**

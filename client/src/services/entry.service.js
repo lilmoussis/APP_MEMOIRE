@@ -17,7 +17,8 @@ const entryService = {
       parkingId, 
       vehicleType, 
       startDate, 
-      endDate 
+      endDate,
+      search
     } = params;
     
     const queryParams = new URLSearchParams({
@@ -27,11 +28,19 @@ const entryService = {
       ...(parkingId && { parkingId }),
       ...(vehicleType && { vehicleType }),
       ...(startDate && { startDate }),
-      ...(endDate && { endDate })
+      ...(endDate && { endDate }),
+      ...(search && { search })
     });
     
     const response = await apiClient.get(`${API_CONFIG.ENDPOINTS.ENTRIES.BASE}?${queryParams}`);
     return response.data.data;
+  },
+  
+  /**
+   * Alias de getAllEntries
+   */
+  async getAll(params = {}) {
+    return this.getAllEntries(params);
   },
   
   /**
@@ -76,12 +85,30 @@ const entryService = {
     return response.data.data;
   },
   
+  async create(entryData) {
+    return this.createEntry(entryData);
+  },
+  
+  /**
+   * Alias de createEntry
+   */
+  async recordEntry(entryData) {
+    return this.createEntry(entryData);
+  },
+  
   /**
    * Enregistrer une sortie
    */
   async exitEntry(id, exitData = {}) {
     const response = await apiClient.put(API_CONFIG.ENDPOINTS.ENTRIES.EXIT(id), exitData);
     return response.data.data;
+  },
+  
+  /**
+   * Alias de exitEntry
+   */
+  async recordExit(id, exitData = {}) {
+    return this.exitEntry(id, exitData);
   },
   
   /**

@@ -10,17 +10,25 @@ const vehicleService = {
    * Recuperer tous les vehicules avec pagination
    */
   async getAllVehicles(params = {}) {
-    const { page = 1, limit = 10, vehicleType, search } = params;
+    const { page = 1, limit = 10, vehicleType, search, type } = params;
     
     const queryParams = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
       ...(vehicleType && { vehicleType }),
+      ...(type && { vehicleType: type }),
       ...(search && { search })
     });
     
     const response = await apiClient.get(`${API_CONFIG.ENDPOINTS.VEHICLES.BASE}?${queryParams}`);
     return response.data.data;
+  },
+  
+  /**
+   * Alias de getAllVehicles
+   */
+  async getAll(params = {}) {
+    return this.getAllVehicles(params);
   },
   
   /**
@@ -39,6 +47,10 @@ const vehicleService = {
     return response.data.data;
   },
   
+  async create(vehicleData) {
+    return this.createVehicle(vehicleData);
+  },
+  
   /**
    * Modifier un vehicule
    */
@@ -47,12 +59,20 @@ const vehicleService = {
     return response.data.data;
   },
   
+  async update(id, vehicleData) {
+    return this.updateVehicle(id, vehicleData);
+  },
+  
   /**
    * Supprimer un vehicule
    */
   async deleteVehicle(id) {
     const response = await apiClient.delete(API_CONFIG.ENDPOINTS.VEHICLES.BY_ID(id));
     return response.data;
+  },
+  
+  async delete(id) {
+    return this.deleteVehicle(id);
   },
   
   /**

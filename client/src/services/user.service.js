@@ -26,6 +26,13 @@ const userService = {
   },
   
   /**
+   * Alias de getAllUsers
+   */
+  async getAll(params = {}) {
+    return this.getAllUsers(params);
+  },
+  
+  /**
    * Recuperer un utilisateur par ID
    */
   async getUserById(id) {
@@ -41,6 +48,10 @@ const userService = {
     return response.data.data;
   },
   
+  async create(userData) {
+    return this.createUser(userData);
+  },
+  
   /**
    * Modifier un utilisateur
    */
@@ -49,12 +60,20 @@ const userService = {
     return response.data.data;
   },
   
+  async update(id, userData) {
+    return this.updateUser(id, userData);
+  },
+  
   /**
    * Supprimer un utilisateur
    */
   async deleteUser(id) {
     const response = await apiClient.delete(API_CONFIG.ENDPOINTS.USERS.BY_ID(id));
     return response.data;
+  },
+  
+  async delete(id) {
+    return this.deleteUser(id);
   },
   
   /**

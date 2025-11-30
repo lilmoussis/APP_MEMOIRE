@@ -15,6 +15,13 @@ const parkingService = {
   },
   
   /**
+   * Alias de getAllParkings
+   */
+  async getAll() {
+    return this.getAllParkings();
+  },
+  
+  /**
    * Recuperer un parking par ID
    */
   async getParkingById(id) {
@@ -30,6 +37,10 @@ const parkingService = {
     return response.data.data;
   },
   
+  async create(parkingData) {
+    return this.createParking(parkingData);
+  },
+  
   /**
    * Modifier un parking (Super Admin)
    */
@@ -38,12 +49,20 @@ const parkingService = {
     return response.data.data;
   },
   
+  async update(id, parkingData) {
+    return this.updateParking(id, parkingData);
+  },
+  
   /**
    * Supprimer un parking (Super Admin)
    */
   async deleteParking(id) {
     const response = await apiClient.delete(API_CONFIG.ENDPOINTS.PARKING.BY_ID(id));
     return response.data;
+  },
+  
+  async delete(id) {
+    return this.deleteParking(id);
   },
   
   /**

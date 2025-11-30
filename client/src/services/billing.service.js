@@ -17,7 +17,9 @@ const billingService = {
       endDate, 
       parkingId, 
       minAmount, 
-      maxAmount 
+      maxAmount,
+      search,
+      period
     } = params;
     
     const queryParams = new URLSearchParams({
@@ -27,13 +29,31 @@ const billingService = {
       ...(endDate && { endDate }),
       ...(parkingId && { parkingId }),
       ...(minAmount && { minAmount: minAmount.toString() }),
-      ...(maxAmount && { maxAmount: maxAmount.toString() })
+      ...(maxAmount && { maxAmount: maxAmount.toString() }),
+      ...(search && { search }),
+      ...(period && { period })
     });
     
     const response = await apiClient.get(
       `${API_CONFIG.ENDPOINTS.BILLING.HISTORY}?${queryParams}`
     );
     return response.data.data;
+  },
+  
+  /**
+   * Alias de getBillingHistory
+   */
+  async getInvoices(params = {}) {
+    return this.getBillingHistory(params);
+  },
+  
+  /**
+   * Generer une facture pour une entree
+   */
+  async generateInvoice(entryId) {
+    // La facture est generee automatiquement a la sortie
+    // Cette methode peut etre utilisee pour regenerer ou forcer la generation
+    return this.getBillingByEntry(entryId);
   },
   
   /**
