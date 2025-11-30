@@ -206,11 +206,11 @@ export default function Vehicles() {
   const renderActions = (vehicle) => (
     <>
       <button
-        className="btn btn-sm btn-outline-secondary"
+        className="btn btn-sm btn-outline-primary me-1"
         onClick={() => handleOpenModal(vehicle)}
         title="Modifier"
       >
-        <Edit2 size={16} />
+        <Edit2 size={14} />
       </button>
       <button
         className="btn btn-sm btn-outline-danger"
@@ -220,7 +220,7 @@ export default function Vehicles() {
         }}
         title="Supprimer"
       >
-        <Trash2 size={16} />
+        <Trash2 size={14} />
       </button>
     </>
   );
@@ -231,32 +231,32 @@ export default function Vehicles() {
 
   return (
     <div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-3">
         <div>
-          <h2 className="h3 mb-1">Gestion des vehicules</h2>
-          <p className="text-muted mb-0">Liste et gestion des vehicules enregistres</p>
+          <h2 className="h4 mb-1">Gestion des vehicules</h2>
+          <p className="text-muted mb-0 small">Liste et gestion des vehicules enregistres</p>
         </div>
         <button 
-          className="btn btn-primary"
+          className="btn btn-primary btn-sm"
           onClick={() => handleOpenModal()}
         >
-          <Plus size={18} className="me-2" />
-          Ajouter un vehicule
+          <Plus size={16} className="me-1" />
+          Ajouter
         </button>
       </div>
 
-      <div className="card mb-4">
-        <div className="card-body">
-          <div className="row g-3">
+      <div className="card mb-3">
+        <div className="card-body p-3">
+          <div className="row g-2">
             <div className="col-md-8">
               <SearchBar
                 onSearch={handleSearch}
-                placeholder="Rechercher par plaque d'immatriculation..."
+                placeholder="Rechercher par plaque..."
               />
             </div>
             <div className="col-md-4">
               <select
-                className="form-select"
+                className="form-select form-select-sm"
                 value={filters.vehicleType}
                 onChange={(e) => {
                   setFilters(prev => ({ ...prev, vehicleType: e.target.value }));
@@ -275,7 +275,7 @@ export default function Vehicles() {
       </div>
 
       <div className="card">
-        <div className="card-body">
+        <div className="card-body p-3">
           <DataTable
             columns={columns}
             data={vehicles}

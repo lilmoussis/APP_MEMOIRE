@@ -43,28 +43,47 @@ export default function Sidebar() {
   
   return (
     <div className="sidebar">
-      <div className="px-3 mb-4">
-        <h3 className="navbar-brand mb-0">SmartPark</h3>
-        <p className="text-muted small mb-0">
-          {user?.role === 'SUPER_ADMIN' ? 'Super Administrateur' : 'Gerant'}
-        </p>
-        <p className="text-muted small">{user?.email}</p>
+      <div className="sidebar-header">
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <div className="sidebar-logo">
+            <ParkingSquare size={28} strokeWidth={2.5} />
+          </div>
+          <div>
+            <h3 className="sidebar-brand mb-0">SmartPark</h3>
+            <span className="sidebar-subtitle">Gestion Parking</span>
+          </div>
+        </div>
+        
+        <div className="sidebar-user">
+          <div className="user-avatar">
+            {user?.firstName?.[0] || user?.username?.[0] || 'U'}
+          </div>
+          <div className="user-info">
+            <p className="user-name">{user?.firstName || user?.username}</p>
+            <p className="user-role">
+              {user?.role === 'SUPER_ADMIN' ? 'Super Admin' : 'Gérant'}
+            </p>
+          </div>
+        </div>
       </div>
       
-      <nav>
-        {links.map((link) => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            className={({ isActive }) => 
-              `sidebar-link ${isActive ? 'active' : ''}`
-            }
-            end={link.to === '/admin' || link.to === '/gerant'}
-          >
-            <link.icon size={20} />
-            <span>{link.label}</span>
-          </NavLink>
-        ))}
+      <nav className="sidebar-nav">
+        <div className="nav-section">
+          <span className="nav-section-title">Navigation</span>
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) => 
+                `sidebar-link ${isActive ? 'active' : ''}`
+              }
+              end={link.to === '/admin' || link.to === '/gerant'}
+            >
+              <link.icon size={18} strokeWidth={2} />
+              <span>{link.label}</span>
+            </NavLink>
+          ))}
+        </div>
       </nav>
     </div>
   );

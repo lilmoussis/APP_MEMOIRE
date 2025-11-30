@@ -31,27 +31,32 @@ export default function DataTable({
 
   return (
     <div className="table-responsive">
-      <table className="table table-hover">
-        <thead>
+      <table className="table table-hover align-middle mb-0">
+        <thead className="table-light">
           <tr>
             {columns.map((column) => (
               <th 
                 key={column.key}
                 onClick={() => handleSort(column.key)}
-                style={{ cursor: column.sortable ? 'pointer' : 'default' }}
+                style={{ 
+                  cursor: column.sortable ? 'pointer' : 'default',
+                  userSelect: 'none'
+                }}
                 className={column.className || ''}
               >
-                <div className="d-flex align-items-center justify-content-between">
+                <div className="d-flex align-items-center gap-2">
                   <span>{column.label}</span>
                   {column.sortable && sortColumn === column.key && (
-                    sortDirection === 'asc' ? 
-                      <ChevronUp size={16} /> : 
-                      <ChevronDown size={16} />
+                    <span className="text-primary">
+                      {sortDirection === 'asc' ? 
+                        <ChevronUp size={14} /> : 
+                        <ChevronDown size={14} />}
+                    </span>
                   )}
                 </div>
               </th>
             ))}
-            {actions && <th className="text-end">Actions</th>}
+            {actions && <th className="text-end" style={{ width: '120px' }}>Actions</th>}
           </tr>
         </thead>
         <tbody>
