@@ -27,109 +27,128 @@ export default function Navbar() {
   };
   
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white mb-4">
-      <div className="container-fluid">
-        <button className="btn btn-link d-lg-none" type="button">
-          <Menu size={24} />
+    <nav className="navbar-custom">
+      <div className="navbar-container">
+        <button className="btn btn-link d-lg-none menu-toggle" type="button">
+          <Menu size={20} />
         </button>
         
-        <div className="ms-auto d-flex align-items-center">
+        <div className="navbar-actions">
           {/* Notifications */}
-          <div className="position-relative me-3">
+          <div className="notification-wrapper">
             <button 
-              className="btn btn-link position-relative"
+              className={`notification-btn ${unreadCount > 0 ? 'has-notifications' : ''}`}
               onClick={handleNotificationClick}
+              title="Notifications"
             >
-              <Bell size={20} />
+              <Bell size={20} strokeWidth={2} />
               {unreadCount > 0 && (
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {unreadCount}
-                </span>
+                <span className="notification-badge">{unreadCount > 9 ? '9+' : unreadCount}</span>
               )}
             </button>
             
             {showNotifications && (
-              <div 
-                className="position-absolute end-0 mt-2 bg-white rounded shadow-lg"
-                style={{ width: '320px', maxHeight: '400px', overflowY: 'auto', zIndex: 1000 }}
-              >
-                <div className="p-3 border-bottom">
-                  <h6 className="mb-0">Notifications</h6>
-                </div>
-                
-                {notifications.length === 0 ? (
-                  <div className="p-3 text-center text-muted">
-                    Aucune notification
+              <>
+                <div className="dropdown-overlay" onClick={() => setShowNotifications(false)}></div>
+                <div className="notification-dropdown">
+                  <div className="dropdown-header">
+                    <h6 className="dropdown-title">Notifications</h6>
+                    {unreadCount > 0 && (
+                      <button className="btn-mark-read" onClick={() => markAllAsRead()}>
+                        Tout marquer lu
+                      </button>
+                    )}
                   </div>
-                ) : (
-                  <div>
-                    {notifications.slice(0, 5).map((notif) => (
-                      <div 
-                        key={notif.id}
-                        className={`p-3 border-bottom ${!notif.read ? 'bg-light' : ''}`}
-                      >
-                        <div className="d-flex align-items-start">
-                          <div className="flex-grow-1">
-                            <h6 className="mb-1 small">{notif.title}</h6>
-                            <p className="mb-0 small text-muted">{notif.message}</p>
-                          </div>
-                        </div>
+                  
+                  <div className="notification-list">
+                    {notifications.length === 0 ? (
+                      <div className="empty-notifications">
+                        <Bell size={32} className="empty-icon" />
+                        <p className="empty-text">Aucune notification</p>
                       </div>
-                    ))}
+                    ) : (
+                      <>
+                        {notifications.slice(0, 5).map((notif) => (
+                          <div 
+                            key={notif.id}
+                            className={`notification-item ${!notif.read ? 'unread' : ''}`}
+                          >
+                            <div className="notification-icon">
+                              <Bell size={16} />
+                            </div>
+                            <div className="notification-content">
+                              <h6 className="notification-title">{notif.title}</h6>
+                              <p className="notification-message">{notif.message}</p>
+                              {notif.timestamp && (
+                                <span className="notification-time">
+                                  {new Date(notif.timestamp).toLocaleString('fr-FR')}
+                                </span>
+                              )}
+                            </div>
+                            {!notif.read && <div className="unread-indicator"></div>}
+                          </div>
+                        ))}
+                      </>
+                    )}
                   </div>
-                )}
-              </div>
+                </div>
+              </>
             )}
           </div>
           
           {/* Menu utilisateur */}
-          <div className="position-relative">
+          <div className="user-menu-wrapper">
             <button 
-              className="btn btn-link d-flex align-items-center"
+              className="user-menu-btn"
               onClick={() => setShowUserMenu(!showUserMenu)}
             >
-              <div 
-                className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                style={{ width: '32px', height: '32px' }}
-              >
+              <div className="user-avatar">
                 {user?.firstName?.[0] || user?.username?.[0] || 'U'}
               </div>
-              <span className="ms-2 d-none d-md-inline">
-                {user?.firstName || user?.username}
-              </span>
+              <div className="user-info d-none d-md-block">
+                <span className="user-name">{user?.firstName || user?.username}</span>
+                <span className="user-role">{user?.role === 'SUPER_ADMIN' ? 'Super Admin' : 'Gérant'}</span>
+              </div>
             </button>
             
             {showUserMenu && (
-              <div 
-                className="position-absolute end-0 mt-2 bg-white rounded shadow-lg"
-                style={{ width: '200px', zIndex: 1000 }}
-              >
-                <div className="p-3 border-bottom">
-                  <div className="fw-bold">{user?.username}</div>
-                  <div className="small text-muted">{user?.email}</div>
-                </div>
-                
-                <div className="p-2">
-                  <button 
-                    className="btn btn-link text-decoration-none w-100 text-start d-flex align-items-center"
-                    onClick={() => {
-                      setShowUserMenu(false);
-                      navigate('/profile');
-                    }}
-                  >
-                    <User size={16} className="me-2" />
-                    Profil
-                  </button>
+              <>
+                <div className="dropdown-overlay" onClick={() => setShowUserMenu(false)}></div>
+                <div className="user-dropdown">
+                  <div className="user-dropdown-header">
+                    <div className="user-avatar-large">
+                      {user?.firstName?.[0] || user?.username?.[0] || 'U'}
+                    </div>
+                    <div className="user-dropdown-info">
+                      <div className="user-dropdown-name">{user?.firstName || user?.username}</div>
+                      <div className="user-dropdown-email">{user?.email}</div>
+                    </div>
+                  </div>
                   
-                  <button 
-                    className="btn btn-link text-danger text-decoration-none w-100 text-start d-flex align-items-center"
-                    onClick={handleLogout}
-                  >
-                    <LogOut size={16} className="me-2" />
-                    Deconnexion
-                  </button>
+                  <div className="user-dropdown-menu">
+                    <button 
+                      className="dropdown-menu-item"
+                      onClick={() => {
+                        setShowUserMenu(false);
+                        navigate('/profile');
+                      }}
+                    >
+                      <User size={18} />
+                      <span>Mon Profil</span>
+                    </button>
+                    
+                    <div className="dropdown-divider"></div>
+                    
+                    <button 
+                      className="dropdown-menu-item logout"
+                      onClick={handleLogout}
+                    >
+                      <LogOut size={18} />
+                      <span>Déconnexion</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
           </div>
         </div>
