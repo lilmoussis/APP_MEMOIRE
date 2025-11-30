@@ -26,28 +26,35 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md', f
   };
 
   return (
-    <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-      <div className={`modal-dialog modal-dialog-centered modal-dialog-scrollable ${sizeClasses[size]}`}>
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{title}</h5>
-            <button 
-              type="button" 
-              className="btn-close" 
-              onClick={onClose}
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            {children}
-          </div>
-          {footer && (
-            <div className="modal-footer">
-              {footer}
+    <>
+      <div className="modal-backdrop-modern" onClick={onClose}></div>
+      <div className="modal-modern show">
+        <div className={`modal-dialog-modern ${sizeClasses[size]}`}>
+          <div className="modal-content-modern">
+            <div className="modal-header-modern">
+              <div className="modal-header-content">
+                <h5 className="modal-title-modern">{title}</h5>
+                <button 
+                  type="button" 
+                  className="modal-close-btn"
+                  onClick={onClose}
+                  aria-label="Close"
+                >
+                  <X size={20} strokeWidth={2} />
+                </button>
+              </div>
             </div>
-          )}
+            <div className="modal-body-modern">
+              {children}
+            </div>
+            {footer && (
+              <div className="modal-footer-modern">
+                {footer}
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
