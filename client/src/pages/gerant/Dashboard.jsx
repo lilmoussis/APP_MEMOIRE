@@ -9,6 +9,7 @@ import statsService from '../../services/stats.service';
 import { useStatsStore } from '../../store';
 import Loading from '../../components/common/Loading';
 import ErrorMessage from '../../components/common/ErrorMessage';
+import AnimatedCounter from '../../components/common/AnimatedCounter';
 
 export default function GerantDashboard() {
   const { dashboardStats, setDashboardStats, isLoading, setLoading, error, setError } = useStatsStore();
@@ -75,7 +76,9 @@ export default function GerantDashboard() {
             <div className="stat-card-icon">
               <Car size={24} />
             </div>
-            <div className="stat-card-value">{overview.activeEntries || 0}</div>
+            <div className="stat-card-value">
+              <AnimatedCounter value={overview.activeEntries || 0} />
+            </div>
             <div className="stat-card-label">Vehicules presents</div>
           </div>
         </div>
@@ -85,7 +88,9 @@ export default function GerantDashboard() {
             <div className="stat-card-icon">
               <TrendingUp size={24} />
             </div>
-            <div className="stat-card-value">{overview.todayEntries || 0}</div>
+            <div className="stat-card-value">
+              <AnimatedCounter value={overview.todayEntries || 0} />
+            </div>
             <div className="stat-card-label">Entrees aujourd'hui</div>
           </div>
         </div>
@@ -96,7 +101,11 @@ export default function GerantDashboard() {
               <Clock size={24} />
             </div>
             <div className="stat-card-value">
-              {(overview.todayRevenue || 0).toLocaleString('fr-FR')} FCFA
+              <AnimatedCounter 
+                value={overview.todayRevenue || 0} 
+                suffix=" FCFA"
+                duration={2}
+              />
             </div>
             <div className="stat-card-label">Revenus du jour</div>
           </div>

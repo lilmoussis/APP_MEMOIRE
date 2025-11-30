@@ -9,6 +9,7 @@ import statsService from '../../services/stats.service';
 import { useStatsStore } from '../../store';
 import Loading from '../../components/common/Loading';
 import ErrorMessage from '../../components/common/ErrorMessage';
+import AnimatedCounter from '../../components/common/AnimatedCounter';
 
 export default function AdminDashboard() {
   const { dashboardStats, setDashboardStats, isLoading, setLoading, error, setError } = useStatsStore();
@@ -75,7 +76,9 @@ export default function AdminDashboard() {
             <div className="stat-card-icon">
               <ParkingSquare size={24} />
             </div>
-            <div className="stat-card-value">{overview.totalParkings || 0}</div>
+            <div className="stat-card-value">
+              <AnimatedCounter value={overview.totalParkings || 0} />
+            </div>
             <div className="stat-card-label">Parkings actifs</div>
           </div>
         </div>
@@ -85,7 +88,9 @@ export default function AdminDashboard() {
             <div className="stat-card-icon">
               <Car size={24} />
             </div>
-            <div className="stat-card-value">{overview.activeEntries || 0}</div>
+            <div className="stat-card-value">
+              <AnimatedCounter value={overview.activeEntries || 0} />
+            </div>
             <div className="stat-card-label">Vehicules presents</div>
           </div>
         </div>
@@ -95,7 +100,9 @@ export default function AdminDashboard() {
             <div className="stat-card-icon">
               <TrendingUp size={24} />
             </div>
-            <div className="stat-card-value">{overview.todayEntries || 0}</div>
+            <div className="stat-card-value">
+              <AnimatedCounter value={overview.todayEntries || 0} />
+            </div>
             <div className="stat-card-label">Entrees aujourd'hui</div>
           </div>
         </div>
@@ -105,7 +112,9 @@ export default function AdminDashboard() {
             <div className="stat-card-icon">
               <Users size={24} />
             </div>
-            <div className="stat-card-value">{overview.totalVehicles || 0}</div>
+            <div className="stat-card-value">
+              <AnimatedCounter value={overview.totalVehicles || 0} />
+            </div>
             <div className="stat-card-label">Vehicules enregistres</div>
           </div>
         </div>
@@ -120,7 +129,11 @@ export default function AdminDashboard() {
             </div>
             <div className="card-body">
               <h3 className="text-primary mb-0">
-                {(overview.todayRevenue || 0).toLocaleString('fr-FR')} FCFA
+                <AnimatedCounter 
+                  value={overview.todayRevenue || 0} 
+                  suffix=" FCFA"
+                  duration={2}
+                />
               </h3>
               <p className="text-muted small mb-0">Total des paiements effectues</p>
             </div>
@@ -134,7 +147,11 @@ export default function AdminDashboard() {
             </div>
             <div className="card-body">
               <h3 className="text-success mb-0">
-                {(overview.totalRevenue || 0).toLocaleString('fr-FR')} FCFA
+                <AnimatedCounter 
+                  value={overview.totalRevenue || 0} 
+                  suffix=" FCFA"
+                  duration={2}
+                />
               </h3>
               <p className="text-muted small mb-0">Depuis le debut</p>
             </div>
