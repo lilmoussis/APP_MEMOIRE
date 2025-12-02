@@ -1,1 +1,0 @@
-exports.now = () => new Date();
