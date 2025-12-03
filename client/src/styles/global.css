@@ -1,0 +1,1926 @@
+/**
+ * Styles globaux de l'application SmartPark
+ * Couleur principale: #624bff (violet principal)
+ * Système de design moderne avec gradients et ombres portées
+ */
+
+/* ==========================================================================
+   POLICES DE CARACTÈRES
+   ========================================================================== */
+
+/* Déclaration de la police Google Sans Flex (Product Sans) avec différentes variantes */
+@font-face {
+  font-family: 'Google Sans';                     /* Nom de la famille de polices */
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Regular.ttf') format('truetype'); /* Chemin vers le fichier */
+  font-weight: 400;                               /* Poids normal (regular) */
+  font-style: normal;                             /* Style normal (pas d'italique) */
+  font-display: swap;                             /* Optimisation de chargement (swap) */
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Italic.ttf') format('truetype');
+  font-weight: 400;                               /* Poids normal */
+  font-style: italic;                             /* Style italique */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Light.ttf') format('truetype');
+  font-weight: 300;                               /* Poids léger */
+  font-style: normal;                             /* Style normal */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-LightItalic.ttf') format('truetype');
+  font-weight: 300;                               /* Poids léger */
+  font-style: italic;                             /* Style italique */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Medium.ttf') format('truetype');
+  font-weight: 500;                               /* Poids moyen */
+  font-style: normal;                             /* Style normal */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;                               /* Poids moyen */
+  font-style: italic;                             /* Style italique */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Bold.ttf') format('truetype');
+  font-weight: 700;                               /* Poids gras */
+  font-style: normal;                             /* Style normal */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;                               /* Poids gras */
+  font-style: italic;                             /* Style italique */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Black.ttf') format('truetype');
+  font-weight: 900;                               /* Poids très gras (black) */
+  font-style: normal;                             /* Style normal */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-BlackItalic.ttf') format('truetype');
+  font-weight: 900;                               /* Poids très gras */
+  font-style: italic;                             /* Style italique */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-Thin.ttf') format('truetype');
+  font-weight: 100;                               /* Poids fin (thin) */
+  font-style: normal;                             /* Style normal */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('../assets/fonts/Google-Sans-Flex/ProductSans-ThinItalic.ttf') format('truetype');
+  font-weight: 100;                               /* Poids fin */
+  font-style: italic;                             /* Style italique */
+  font-display: swap;
+}
+
+/* ==========================================================================
+   VARIABLES CSS (CUSTOM PROPERTIES)
+   ========================================================================== */
+
+:root {
+  /* Palette de couleurs principales (violet) */
+  --primary-color: #624bff;                       /* Couleur principale */
+  --primary-dark: #4d3acc;                        /* Version plus sombre */
+  --primary-light: #7d66ff;                       /* Version plus claire */
+  --primary-lighter: #9985ff;                     /* Version encore plus claire */
+  
+  /* Couleurs secondaires (système de feedback) */
+  --secondary-color: #6c757d;                     /* Gris secondaire */
+  --success-color: #28a745;                       /* Vert de succès */
+  --danger-color: #dc3545;                        /* Rouge d'erreur */
+  --warning-color: #ffc107;                       /* Jaune d'avertissement */
+  --info-color: #17a2b8;                          /* Bleu d'information */
+  
+  /* Échelle de gris pour la hiérarchie visuelle */
+  --dark: #212529;                                /* Texte principal */
+  --light: #f8f9fa;                               /* Arrière-plan clair */
+  --white: #ffffff;                               /* Blanc pur */
+  --gray-100: #f8f9fa;                            /* Gris très clair */
+  --gray-200: #e9ecef;                            /* Gris clair */
+  --gray-300: #dee2e6;                            /* Gris moyen-clair */
+  --gray-400: #ced4da;                            /* Gris moyen */
+  --gray-500: #adb5bd;                            /* Gris */
+  --gray-600: #6c757d;                            /* Gris foncé */
+  --gray-700: #495057;                            /* Gris très foncé */
+  --gray-800: #343a40;                            /* Gris presque noir */
+  --gray-900: #212529;                            /* Noir */
+  
+  /* Système d'ombres (depth system) */
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);      /* Ombre légère */
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);              /* Ombre standard */
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);            /* Grande ombre */
+  
+  /* Animation et transitions */
+  --transition: all 0.3s ease-in-out;             /* Transition par défaut */
+}
+
+/* ==========================================================================
+   RÉINITIALISATION ET STYLES DE BASE
+   ========================================================================== */
+
+/* Réinitialisation CSS (reset) */
+* {
+  margin: 0;                                     /* Supprime les marges par défaut */
+  padding: 0;                                    /* Supprime les paddings par défaut */
+  box-sizing: border-box;                        /* Modèle de boîte plus intuitif */
+}
+
+/* Styles de base pour le corps de la page */
+body {
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;                                  /* Stack de polices de secours */
+  -webkit-font-smoothing: antialiased;           /* Lissage des polices sur WebKit */
+  -moz-osx-font-smoothing: grayscale;            /* Lissage des polices sur Firefox */
+  background-color: var(--gray-100);             /* Couleur d'arrière-plan */
+  color: var(--dark);                            /* Couleur du texte principal */
+  font-weight: 400;                              /* Poids de police par défaut */
+}
+
+/* ==========================================================================
+   SURCHARGE DES STYLES BOOTSTRAP
+   ========================================================================== */
+
+/* Surcharge de la couleur primaire Bootstrap */
+.btn-primary {
+  background-color: var(--primary-color) !important;     /* Fond violet */
+  border-color: var(--primary-color) !important;         /* Bordure violette */
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark) !important;      /* Assombrir au survol */
+  border-color: var(--primary-dark) !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--primary-dark) !important;      /* État actif/focus */
+  border-color: var(--primary-dark) !important;
+  box-shadow: 0 0 0 0.2rem rgba(98, 75, 255, 0.5) !important; /* Effet de halo */
+}
+
+/* Classes utilitaires avec couleur primaire */
+.bg-primary {
+  background-color: var(--primary-color) !important;     /* Fond primaire */
+}
+
+.text-primary {
+  color: var(--primary-color) !important;                /* Texte primaire */
+}
+
+.border-primary {
+  border-color: var(--primary-color) !important;         /* Bordure primaire */
+}
+
+/* ==========================================================================
+   COMPOSANTS DE NAVIGATION
+   ========================================================================== */
+
+/* Barre de navigation personnalisée */
+.navbar-custom {
+  background: linear-gradient(135deg, var(--white) 0%, #fafbfc 100%); /* Dégradé subtil */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);            /* Ombre légère */
+  padding: 0.75rem 1.5rem;                              /* Espacement interne */
+  margin-bottom: 1.5rem;                                /* Marge inférieure */
+  border-radius: 0.75rem;                               /* Coins arrondis */
+  backdrop-filter: blur(10px);                          /* Effet de flou de fond */
+  position: sticky;                                     /* Position collante */
+  top: 0;                                               /* Collé en haut */
+  z-index: 1001;                                        /* Au-dessus du contenu */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);    /* Transition fluide */
+}
+
+/* État défilé de la navbar (effet glassmorphism) */
+.navbar-custom.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.7);                 /* Fond semi-transparent */
+  backdrop-filter: blur(20px) saturate(180%);           /* Flou accentué */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);           /* Ombre plus prononcée */
+  border-radius: 0;                                     /* Pas de coins arrondis */
+  padding: 0.625rem 1.5rem;                             /* Padding réduit */
+}
+
+/* Conteneur principal de la navbar */
+.navbar-container {
+  display: flex;                                        /* Flexbox pour l'alignement */
+  align-items: center;                                  /* Centrage vertical */
+  justify-content: space-between;                       /* Éléments aux extrémités */
+}
+
+/* Zone des actions utilisateur */
+.navbar-actions {
+  display: flex;                                        /* Disposition horizontale */
+  align-items: center;                                  /* Centrage vertical */
+  gap: 0.75rem;                                         /* Espace entre les éléments */
+  margin-left: auto;                                    /* Pousse à droite */
+}
+
+/* Bouton de menu (mobile) */
+.menu-toggle {
+  color: var(--gray-700);                               /* Couleur grise */
+  padding: 0.5rem;                                      /* Espacement interne */
+}
+
+/* ==========================================================================
+   SYSTÈME DE NOTIFICATIONS
+   ========================================================================== */
+
+/* Conteneur des notifications */
+.notification-wrapper {
+  position: relative;                                   /* Position relative pour le badge */
+}
+
+/* Bouton de notifications */
+.notification-btn {
+  position: relative;                                   /* Pour le positionnement du badge */
+  width: 40px;                                          /* Largeur fixe */
+  height: 40px;                                         /* Hauteur fixe */
+  border-radius: 50%;                                   /* Cercle parfait */
+  border: none;                                         /* Pas de bordure */
+  background: var(--white);                             /* Fond blanc */
+  color: var(--gray-700);                               /* Icône grise */
+  display: flex;                                        /* Flexbox pour centrage */
+  align-items: center;                                  /* Centrage vertical */
+  justify-content: center;                              /* Centrage horizontal */
+  cursor: pointer;                                      /* Curseur pointeur */
+  transition: all 0.2s ease;                            /* Transition douce */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);           /* Ombre légère */
+}
+
+/* Effet au survol du bouton */
+.notification-btn:hover {
+  background: var(--gray-100);                          /* Fond gris très clair */
+  transform: scale(1.05);                               /* Légère mise à l'échelle */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);          /* Ombre accentuée */
+}
+
+/* Classe quand il y a des notifications non lues */
+.notification-btn.has-notifications {
+  animation: pulse 2s infinite;                         /* Animation de pulsation continue */
+}
+
+/* Animation de pulsation pour attirer l'attention */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 2px 8px rgba(98, 75, 255, 0.2);      /* Ombre violette légère */
+  }
+  50% {
+    box-shadow: 0 2px 16px rgba(98, 75, 255, 0.4);     /* Ombre violette accentuée */
+  }
+}
+
+/* Badge indiquant le nombre de notifications */
+.notification-badge {
+  position: absolute;                                   /* Position absolue par rapport au bouton */
+  top: -2px;                                            /* Légèrement au-dessus */
+  right: -2px;                                          /* Légèrement à droite */
+  min-width: 20px;                                      /* Largeur minimale */
+  height: 20px;                                         /* Hauteur fixe */
+  background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%); /* Dégradé rouge/orange */
+  color: var(--white);                                  /* Texte blanc */
+  font-size: 0.7rem;                                    /* Petite taille de police */
+  font-weight: 700;                                     /* Texte en gras */
+  border-radius: 10px;                                  /* Coins arrondis (cercle) */
+  display: flex;                                        /* Flexbox pour centrage */
+  align-items: center;                                  /* Centrage vertical */
+  justify-content: center;                              /* Centrage horizontal */
+  padding: 0 0.25rem;                                   /* Padding horizontal */
+  border: 2px solid var(--white);                       /* Bordure blanche */
+  box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);        /* Ombre rouge */
+}
+
+/* Overlay pour fermer le dropdown en cliquant à l'extérieur */
+.dropdown-overlay {
+  position: fixed;                                      /* Couvre tout l'écran */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;                                       /* En dessous du dropdown */
+}
+
+/* Menu déroulant des notifications */
+.notification-dropdown {
+  position: absolute;                                   /* Position absolue */
+  top: calc(100% + 0.5rem);                            /* En dessous du bouton avec marge */
+  right: 0;                                            /* Aligné à droite */
+  width: 380px;                                        /* Largeur fixe */
+  max-height: 480px;                                   /* Hauteur maximale */
+  background: var(--white);                            /* Fond blanc */
+  border-radius: 0.75rem;                              /* Coins arrondis */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);         /* Ombre portée */
+  z-index: 10001;                                      /* Au-dessus de l'overlay */
+  overflow: hidden;                                    /* Cache le débordement */
+  border: 1px solid var(--gray-200);                   /* Bordure subtile */
+}
+
+/* En-tête du dropdown */
+.dropdown-header {
+  padding: 1rem 1.25rem;                               /* Espacement interne */
+  border-bottom: 1px solid var(--gray-200);            /* Séparateur */
+  display: flex;                                       /* Disposition flexible */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: space-between;                      /* Espace entre les éléments */
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%); /* Dégradé léger */
+}
+
+/* Titre du dropdown */
+.dropdown-title {
+  font-size: 0.9375rem;                                /* Taille de police */
+  font-weight: 600;                                    /* Demi-gras */
+  margin: 0;                                           /* Pas de marge */
+  color: var(--gray-900);                              /* Couleur de texte foncée */
+}
+
+/* Bouton "Tout marquer comme lu" */
+.btn-mark-read {
+  font-size: 0.75rem;                                  /* Petite taille */
+  color: var(--primary-color);                         /* Couleur primaire */
+  background: none;                                    /* Pas de fond */
+  border: none;                                        /* Pas de bordure */
+  cursor: pointer;                                     /* Curseur pointeur */
+  font-weight: 500;                                    /* Poids moyen */
+  padding: 0.25rem 0.5rem;                             /* Petit padding */
+  border-radius: 0.25rem;                              /* Coins légèrement arrondis */
+  transition: all 0.2s ease;                           /* Transition douce */
+}
+
+/* Effet au survol du bouton */
+.btn-mark-read:hover {
+  background: rgba(98, 75, 255, 0.1);                  /* Fond primaire très léger */
+}
+
+/* Liste des notifications */
+.notification-list {
+  max-height: 400px;                                   /* Hauteur maximale avec scroll */
+  overflow-y: auto;                                    /* Scroll vertical si nécessaire */
+}
+
+/* État vide des notifications */
+.empty-notifications {
+  padding: 3rem 2rem;                                  /* Grand padding pour centrage */
+  text-align: center;                                  /* Texte centré */
+}
+
+/* Icône pour état vide */
+.empty-icon {
+  color: var(--gray-400);                              /* Couleur grise */
+  margin-bottom: 0.75rem;                              /* Espace en dessous */
+}
+
+/* Texte pour état vide */
+.empty-text {
+  color: var(--gray-500);                              /* Texte gris */
+  font-size: 0.875rem;                                 /* Taille standard */
+  margin: 0;                                           /* Pas de marge */
+}
+
+/* Élément individuel de notification */
+.notification-item {
+  padding: 1rem 1.25rem;                               /* Espacement interne */
+  border-bottom: 1px solid var(--gray-100);            /* Séparateur léger */
+  display: flex;                                       /* Disposition flexible */
+  align-items: start;                                  /* Alignement en haut */
+  gap: 0.75rem;                                        /* Espace entre les éléments */
+  cursor: pointer;                                     /* Curseur pointeur */
+  transition: all 0.2s ease;                           /* Transition douce */
+  position: relative;                                  /* Pour l'indicateur de non-lu */
+}
+
+/* Effet au survol d'une notification */
+.notification-item:hover {
+  background: var(--gray-50);                          /* Fond gris très clair */
+}
+
+/* Notification non lue */
+.notification-item.unread {
+  background: rgba(98, 75, 255, 0.03);                 /* Fond primaire très léger */
+  border-left: 3px solid var(--primary-color);         /* Bordure gauche colorée */
+}
+
+/* Icône de la notification */
+.notification-icon {
+  width: 36px;                                         /* Taille fixe */
+  height: 36px;                                        /* Taille fixe */
+  border-radius: 50%;                                  /* Cercle */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); /* Dégradé primaire */
+  color: var(--white);                                 /* Icône blanche */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  flex-shrink: 0;                                      /* Empêche le rétrécissement */
+}
+
+/* Contenu textuel de la notification */
+.notification-content {
+  flex: 1;                                             /* Prend l'espace disponible */
+  min-width: 0;                                        /* Important pour le text-overflow */
+}
+
+/* Titre de la notification */
+.notification-title {
+  font-size: 0.875rem;                                 /* Taille standard */
+  font-weight: 600;                                    /* Demi-gras */
+  margin: 0 0 0.25rem;                                 /* Marge en dessous */
+  color: var(--gray-900);                              /* Couleur foncée */
+}
+
+/* Message de la notification */
+.notification-message {
+  font-size: 0.8125rem;                                /* Taille légèrement réduite */
+  color: var(--gray-600);                              /* Couleur grise */
+  margin: 0 0 0.25rem;                                 /* Marge en dessous */
+  line-height: 1.4;                                    /* Hauteur de ligne confortable */
+}
+
+/* Horodatage de la notification */
+.notification-time {
+  font-size: 0.75rem;                                  /* Petite taille */
+  color: var(--gray-500);                              /* Couleur grise claire */
+}
+
+/* Indicateur visuel pour les notifications non lues */
+.unread-indicator {
+  position: absolute;                                   /* Position absolue */
+  top: 1.25rem;                                        /* Position verticale */
+  right: 1.25rem;                                      /* Position horizontale */
+  width: 8px;                                          /* Petit point */
+  height: 8px;                                         /* Petit point */
+  background: var(--primary-color);                    /* Couleur primaire */
+  border-radius: 50%;                                  /* Cercle */
+}
+
+/* ==========================================================================
+   MENU UTILISATEUR
+   ========================================================================== */
+
+/* Conteneur du menu utilisateur */
+.user-menu-wrapper {
+  position: relative;                                   /* Pour le positionnement du dropdown */
+}
+
+/* Bouton du menu utilisateur */
+.user-menu-btn {
+  display: flex;                                        /* Flexbox pour alignement */
+  align-items: center;                                  /* Centrage vertical */
+  gap: 0.625rem;                                        /* Espace entre les éléments */
+  padding: 0.375rem 0.75rem 0.375rem 0.375rem;          /* Padding asymétrique */
+  border-radius: 2rem;                                  /* Forme de capsule */
+  border: none;                                         /* Pas de bordure */
+  background: var(--white);                             /* Fond blanc */
+  cursor: pointer;                                      /* Curseur pointeur */
+  transition: all 0.2s ease;                            /* Transition douce */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);           /* Ombre légère */
+}
+
+/* Effet au survol du bouton utilisateur */
+.user-menu-btn:hover {
+  background: var(--gray-50);                           /* Fond gris très clair */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);          /* Ombre accentuée */
+  transform: translateY(-1px);                          /* Légère élévation */
+}
+
+/* Avatar utilisateur dans le bouton */
+.user-avatar {
+  width: 36px;                                          /* Taille fixe */
+  height: 36px;                                         /* Taille fixe */
+  border-radius: 50%;                                   /* Cercle */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); /* Dégradé primaire */
+  color: var(--white);                                  /* Initiales blanches */
+  display: flex;                                        /* Flexbox pour centrage */
+  align-items: center;                                  /* Centrage vertical */
+  justify-content: center;                              /* Centrage horizontal */
+  font-weight: 600;                                     /* Texte en gras */
+  font-size: 0.875rem;                                  /* Taille standard */
+  border: 2px solid var(--white);                       /* Bordure blanche */
+  box-shadow: 0 2px 8px rgba(98, 75, 255, 0.3);        /* Ombre violette */
+}
+
+/* Informations utilisateur dans le bouton */
+.user-info {
+  display: flex;                                        /* Flexbox en colonne */
+  flex-direction: column;                               /* Disposition verticale */
+  align-items: flex-start;                              /* Alignement à gauche */
+  padding-right: 0.5rem;                                /* Espace à droite */
+}
+
+/* Nom de l'utilisateur */
+.user-name {
+  font-size: 0.875rem;                                  /* Taille standard */
+  font-weight: 600;                                     /* Demi-gras */
+  color: var(--gray-800);                               /* Couleur gris foncé */
+  line-height: 1.2;                                     /* Hauteur de ligne */
+}
+
+/* Rôle de l'utilisateur */
+.user-role {
+  font-size: 0.75rem;                                   /* Petite taille */
+  color: var(--gray-700);                               /* Couleur grise */
+  line-height: 1.2;                                     /* Hauteur de ligne */
+}
+
+/* Dropdown du menu utilisateur */
+.user-dropdown {
+  position: absolute;                                   /* Position absolue */
+  top: calc(100% + 0.5rem);                            /* En dessous du bouton */
+  right: 0;                                            /* Aligné à droite */
+  width: 280px;                                        /* Largeur fixe */
+  background: var(--white);                            /* Fond blanc */
+  border-radius: 0.75rem;                              /* Coins arrondis */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);         /* Ombre portée */
+  z-index: 10001;                                      /* Au-dessus du contenu */
+  overflow: hidden;                                    /* Cache le débordement */
+  border: 1px solid var(--gray-200);                   /* Bordure subtile */
+}
+
+/* En-tête du dropdown utilisateur */
+.user-dropdown-header {
+  padding: 1.25rem;                                    /* Espacement interne */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); /* Dégradé primaire */
+  color: var(--white);                                 /* Texte blanc */
+  display: flex;                                       /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  gap: 0.875rem;                                       /* Espace entre les éléments */
+}
+
+/* Avatar grand dans le dropdown */
+.user-avatar-large {
+  width: 52px;                                         /* Taille plus grande */
+  height: 52px;                                        /* Taille plus grande */
+  border-radius: 50%;                                  /* Cercle */
+  background: rgba(255, 255, 255, 0.2);               /* Fond blanc semi-transparent */
+  color: var(--white);                                 /* Initiales blanches */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  font-weight: 700;                                    /* Texte très gras */
+  font-size: 1.25rem;                                  /* Taille augmentée */
+  border: 2px solid rgba(255, 255, 255, 0.3);         /* Bordure blanche transparente */
+  backdrop-filter: blur(10px);                         /* Effet de flou */
+}
+
+/* Informations dans le dropdown */
+.user-dropdown-info {
+  flex: 1;                                             /* Prend l'espace disponible */
+  min-width: 0;                                        /* Important pour text-overflow */
+}
+
+/* Nom dans le dropdown */
+.user-dropdown-name {
+  font-size: 0.9375rem;                                /* Taille légèrement augmentée */
+  font-weight: 600;                                    /* Demi-gras */
+  margin-bottom: 0.125rem;                             /* Petite marge en dessous */
+  white-space: nowrap;                                 /* Pas de retour à la ligne */
+  overflow: hidden;                                    /* Cache le débordement */
+  text-overflow: ellipsis;                             /* Points de suspension */
+}
+
+/* Email dans le dropdown */
+.user-dropdown-email {
+  font-size: 0.8125rem;                                /* Taille réduite */
+  opacity: 0.9;                                        /* Légère transparence */
+  white-space: nowrap;                                 /* Pas de retour à la ligne */
+  overflow: hidden;                                    /* Cache le débordement */
+  text-overflow: ellipsis;                             /* Points de suspension */
+}
+
+/* Menu des options */
+.user-dropdown-menu {
+  padding: 0.5rem;                                     /* Padding interne */
+}
+
+/* Élément du menu */
+.dropdown-menu-item {
+  width: 100%;                                         /* Prend toute la largeur */
+  display: flex;                                       /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  gap: 0.75rem;                                        /* Espace entre icône et texte */
+  padding: 0.75rem 1rem;                               /* Espacement interne */
+  border: none;                                        /* Pas de bordure */
+  background: none;                                    /* Pas de fond */
+  color: var(--gray-700);                              /* Couleur grise */
+  font-size: 0.875rem;                                 /* Taille standard */
+  font-weight: 500;                                    /* Poids moyen */
+  border-radius: 0.5rem;                               /* Coins arrondis */
+  cursor: pointer;                                     /* Curseur pointeur */
+  transition: all 0.2s ease;                           /* Transition douce */
+  text-align: left;                                    /* Alignement à gauche */
+}
+
+/* Effet au survol des éléments du menu */
+.dropdown-menu-item:hover {
+  background: var(--gray-100);                         /* Fond gris clair */
+  color: var(--primary-color);                         /* Couleur primaire */
+  transform: translateX(4px);                          /* Décalage vers la droite */
+}
+
+/* Style spécifique pour l'option de déconnexion */
+.dropdown-menu-item.logout {
+  color: var(--danger-color);                          /* Couleur rouge */
+}
+
+/* Effet au survol de l'option déconnexion */
+.dropdown-menu-item.logout:hover {
+  background: rgba(220, 53, 69, 0.1);                  /* Fond rouge très léger */
+  color: var(--danger-color);                          /* Couleur rouge */
+}
+
+/* Séparateur dans le menu */
+.dropdown-divider {
+  height: 1px;                                         /* Ligne fine */
+  background: var(--gray-200);                         /* Couleur grise claire */
+  margin: 0.5rem 0;                                    /* Marge verticale */
+}
+
+/* ==========================================================================
+   MARQUE ET LIENS DE NAVIGATION
+   ========================================================================== */
+
+/* Logo/texte de la marque */
+.navbar-brand {
+  font-weight: 700;                                    /* Texte en gras */
+  color: var(--primary-color) !important;              /* Couleur primaire */
+  font-size: 1.5rem;                                   /* Taille augmentée */
+}
+
+/* Liens de navigation */
+.nav-link {
+  color: var(--gray-700) !important;                   /* Couleur grise */
+  transition: var(--transition);                       /* Transition standard */
+  font-weight: 500;                                    /* Poids moyen */
+}
+
+/* Effet au survol des liens */
+.nav-link:hover {
+  color: var(--primary-color) !important;              /* Couleur primaire */
+}
+
+/* Lien actif */
+.nav-link.active {
+  color: var(--primary-color) !important;              /* Couleur primaire */
+}
+
+/* ==========================================================================
+   SIDEBAR (NAVIGATION LATÉRALE)
+   ========================================================================== */
+
+/* Sidebar principal */
+.sidebar {
+  height: 100vh;                                       /* Hauteur pleine page */
+  position: fixed;                                     /* Fixe sur le côté */
+  top: 0;
+  left: 0;
+  width: 260px;                                        /* Largeur fixe */
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); /* Dégradé vertical */
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);         /* Ombre sur le côté droit */
+  overflow-y: auto;                                    /* Scroll vertical si nécessaire */
+  z-index: 1000;                                       /* Au-dessus du contenu */
+  border-right: 1px solid var(--gray-200);             /* Bordure droite subtile */
+}
+
+/* En-tête du sidebar */
+.sidebar-header {
+  padding: 1.5rem;                                     /* Espacement interne */
+  border-bottom: 1px solid var(--gray-200);            /* Séparateur */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); /* Dégradé primaire */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Logo dans le sidebar */
+.sidebar-logo {
+  width: 48px;                                         /* Taille fixe */
+  height: 48px;                                        /* Taille fixe */
+  background: rgba(255, 255, 255, 0.15);              /* Fond blanc transparent */
+  border-radius: 12px;                                 /* Coins arrondis */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  backdrop-filter: blur(10px);                         /* Effet de flou */
+}
+
+/* Texte de la marque dans le sidebar */
+.sidebar-brand {
+  font-size: 1.375rem;                                 /* Taille de police */
+  font-weight: 700;                                    /* Texte en gras */
+  color: var(--white);                                 /* Texte blanc */
+  margin: 0;                                           /* Pas de marge */
+  letter-spacing: -0.5px;                              /* Espacement des lettres réduit */
+}
+
+/* Sous-titre du sidebar */
+.sidebar-subtitle {
+  font-size: 0.75rem;                                  /* Petite taille */
+  opacity: 0.9;                                        /* Légère transparence */
+  font-weight: 500;                                    /* Poids moyen */
+  display: block;                                      /* Élément bloc */
+}
+
+/* Section utilisateur dans le sidebar */
+.sidebar-user {
+  display: flex;                                       /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  gap: 0.75rem;                                        /* Espace entre les éléments */
+  padding: 0.875rem;                                   /* Espacement interne */
+  background: rgba(255, 255, 255, 0.1);               /* Fond blanc très transparent */
+  border-radius: 0.5rem;                               /* Coins arrondis */
+  backdrop-filter: blur(10px);                         /* Effet de flou */
+}
+
+/* Navigation du sidebar */
+.sidebar-nav {
+  padding: 1rem 0.75rem;                               /* Espacement interne */
+}
+
+/* Section de navigation */
+.nav-section {
+  margin-bottom: 1.5rem;                               /* Espace entre les sections */
+}
+
+/* Titre de section */
+.nav-section-title {
+  display: block;                                      /* Élément bloc */
+  font-size: 0.6875rem;                                /* Très petite taille */
+  font-weight: 700;                                    /* Texte en gras */
+  text-transform: uppercase;                           /* Majuscules */
+  letter-spacing: 1px;                                 /* Espacement des lettres */
+  color: var(--gray-500);                              /* Couleur grise */
+  padding: 0 0.75rem;                                  /* Padding horizontal */
+  margin-bottom: 0.5rem;                               /* Marge en dessous */
+}
+
+/* Lien du sidebar */
+.sidebar-link {
+  display: flex;                                       /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  gap: 0.75rem;                                        /* Espace entre icône et texte */
+  padding: 0.625rem 0.875rem;                          /* Espacement interne */
+  color: var(--gray-700);                              /* Couleur grise */
+  text-decoration: none;                               /* Pas de soulignement */
+  transition: all 0.2s ease;                           /* Transition douce */
+  border-radius: 0.5rem;                               /* Coins arrondis */
+  font-size: 0.875rem;                                 /* Taille standard */
+  font-weight: 500;                                    /* Poids moyen */
+  margin-bottom: 0.25rem;                              /* Marge en dessous */
+  position: relative;                                  /* Pour les pseudo-éléments */
+}
+
+/* Effet au survol des liens */
+.sidebar-link:hover {
+  background: linear-gradient(90deg, rgba(98, 75, 255, 0.08) 0%, rgba(98, 75, 255, 0.12) 100%); /* Dégradé horizontal primaire */
+  color: var(--primary-color);                         /* Couleur primaire */
+  transform: translateX(4px);                          /* Décalage vers la droite */
+  padding-left: 1rem;                                  /* Padding gauche augmenté */
+}
+
+/* Lien actif */
+.sidebar-link.active {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); /* Dégradé primaire */
+  color: var(--white);                                 /* Texte blanc */
+  font-weight: 600;                                    /* Demi-gras */
+  box-shadow: 0 4px 12px rgba(98, 75, 255, 0.3);      /* Ombre violette */
+}
+
+/* Indicateur visuel pour le lien actif */
+.sidebar-link.active::before {
+  content: '';                                         /* Pseudo-élément vide */
+  position: absolute;                                  /* Position absolue */
+  left: 0;                                             /* À gauche */
+  top: 50%;                                            /* Au milieu verticalement */
+  transform: translateY(-50%);                         /* Centrage vertical */
+  width: 4px;                                          /* Largeur fine */
+  height: 60%;                                         /* Hauteur relative */
+  background: var(--white);                            /* Couleur blanche */
+  border-radius: 0 4px 4px 0;                         /* Coins arrondis à droite */
+}
+
+/* ==========================================================================
+   CONTENU PRINCIPAL
+   ========================================================================== */
+
+/* Zone de contenu principal */
+.main-content {
+  margin-left: 260px;                                  /* Décallé pour le sidebar */
+  padding: 1.5rem;                                     /* Espacement interne */
+  min-height: 100vh;                                   /* Hauteur minimale pleine page */
+  background-color: var(--gray-100);                   /* Fond gris très clair */
+}
+
+/* ==========================================================================
+   CARTES (CARDS)
+   ========================================================================== */
+
+/* Style de base des cartes */
+.card {
+  border: none;                                        /* Pas de bordure par défaut */
+  background: var(--white);                            /* Fond blanc */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);          /* Ombre légère */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);   /* Transition avec easing */
+  border-radius: 0.875rem;                             /* Coins arrondis */
+  overflow: hidden;                                    /* Cache le débordement */
+}
+
+/* Effet au survol des cartes */
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(98, 75, 255, 0.1); /* Double ombre */
+  transform: translateY(-1px);                         /* Légère élévation */
+}
+
+/* En-tête des cartes */
+.card-header {
+  background: linear-gradient(135deg, rgba(98, 75, 255, 0.03) 0%, rgba(98, 75, 255, 0.08) 100%); /* Dégradé primaire très léger */
+  border-bottom: none;                                 /* Pas de bordure inférieure */
+  font-weight: 600;                                    /* Demi-gras */
+  padding: 1rem 1.25rem;                               /* Espacement interne */
+  font-size: 0.875rem;                                 /* Taille standard */
+  color: var(--gray-800);                              /* Couleur gris foncé */
+  letter-spacing: -0.2px;                              /* Espacement des lettres réduit */
+}
+
+/* Corps des cartes */
+.card-body {
+  padding: 1.25rem;                                    /* Espacement interne */
+}
+
+/* ==========================================================================
+   CARTES DE STATISTIQUES
+   ========================================================================== */
+
+/* Style spécial pour les cartes de statistiques */
+.stat-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); /* Dégradé primaire */
+  color: var(--white);                                 /* Texte blanc */
+  border-radius: 0.875rem;                             /* Coins arrondis */
+  padding: 1.25rem;                                    /* Espacement interne */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);   /* Transition avec easing */
+  box-shadow: 0 2px 6px rgba(98, 75, 255, 0.15);      /* Ombre violette */
+  border: none;                                        /* Pas de bordure */
+}
+
+/* Effet au survol des cartes de stats */
+.stat-card:hover {
+  transform: translateY(-3px);                         /* Élévation plus importante */
+  box-shadow: 0 8px 20px rgba(98, 75, 255, 0.25);     /* Ombre violette accentuée */
+}
+
+/* Icône dans les cartes de stats */
+.stat-card-icon {
+  width: 44px;                                         /* Taille fixe */
+  height: 44px;                                        /* Taille fixe */
+  background-color: rgba(255, 255, 255, 0.18);        /* Fond blanc transparent */
+  border-radius: 0.75rem;                             /* Coins arrondis */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  backdrop-filter: blur(10px);                         /* Effet de flou */
+}
+
+/* Valeur numérique dans les cartes de stats */
+.stat-card-value {
+  font-size: 1.875rem;                                 /* Grande taille */
+  font-weight: 700;                                    /* Texte très gras */
+  margin: 0.875rem 0 0.375rem;                         /* Marges verticales */
+  letter-spacing: -0.5px;                              /* Espacement des lettres réduit */
+}
+
+/* Libellé dans les cartes de stats */
+.stat-card-label {
+  font-size: 0.875rem;                                 /* Taille standard */
+  opacity: 0.92;                                       /* Légère transparence */
+  font-weight: 500;                                    /* Poids moyen */
+}
+
+/* ==========================================================================
+   TABLEAUX
+   ========================================================================== */
+
+/* Style de base des tableaux */
+.table {
+  background-color: var(--white);                      /* Fond blanc */
+  border-radius: 0;                                    /* Pas de coins arrondis */
+  overflow: hidden;                                    /* Cache le débordement */
+  font-size: 0.875rem;                                 /* Taille réduite */
+  border-collapse: separate;                           /* Séparation des bordures */
+  border-spacing: 0;                                   /* Pas d'espacement entre cellules */
+}
+
+/* En-tête des tableaux */
+.table thead th {
+  background: linear-gradient(135deg, rgba(98, 75, 255, 0.04) 0%, rgba(98, 75, 255, 0.08) 100%); /* Dégradé très léger */
+  border-bottom: none;                                 /* Pas de bordure inférieure */
+  font-weight: 600;                                    /* Demi-gras */
+  text-transform: uppercase;                           /* Majuscules */
+  font-size: 0.7rem;                                   /* Très petite taille */
+  letter-spacing: 0.8px;                               /* Espacement des lettres */
+  color: var(--gray-600);                              /* Couleur grise */
+  padding: 0.875rem 1rem;                              /* Espacement interne */
+  white-space: nowrap;                                 /* Pas de retour à la ligne */
+  border-top: none;                                    /* Pas de bordure supérieure */
+  border-left: none;                                   /* Pas de bordure gauche */
+  border-right: none;                                  /* Pas de bordure droite */
+}
+
+/* Première cellule d'en-tête */
+.table thead th:first-child {
+  padding-left: 1.25rem;                               /* Padding gauche augmenté */
+}
+
+/* Dernière cellule d'en-tête */
+.table thead th:last-child {
+  padding-right: 1.25rem;                              /* Padding droit augmenté */
+}
+
+/* Lignes du corps du tableau */
+.table tbody tr {
+  transition: all 0.2s ease;                           /* Transition douce */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);       /* Séparateur très subtil */
+}
+
+/* Dernière ligne du tableau */
+.table tbody tr:last-child {
+  border-bottom: none;                                 /* Pas de bordure inférieure */
+}
+
+/* Effet au survol des lignes */
+.table tbody tr:hover {
+  background: linear-gradient(90deg, rgba(98, 75, 255, 0.02) 0%, rgba(98, 75, 255, 0.05) 100%); /* Dégradé horizontal très léger */
+  transform: translateX(2px);                          /* Légère translation */
+}
+
+/* Cellules du corps du tableau */
+.table tbody td {
+  padding: 0.875rem 1rem;                              /* Espacement interne */
+  vertical-align: middle;                              /* Alignement vertical au centre */
+  color: var(--gray-700);                              /* Couleur grise */
+  border: none;                                        /* Pas de bordure */
+}
+
+/* Première cellule du corps */
+.table tbody td:first-child {
+  padding-left: 1.25rem;                               /* Padding gauche augmenté */
+}
+
+/* Dernière cellule du corps */
+.table tbody td:last-child {
+  padding-right: 1.25rem;                              /* Padding droit augmenté */
+}
+
+/* Conteneur de tableau responsive */
+.table-responsive {
+  border-radius: 0.875rem;                             /* Coins arrondis */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);          /* Ombre légère */
+  overflow: hidden;                                    /* Cache le débordement */
+  background: var(--white);                            /* Fond blanc */
+  border: none;                                        /* Pas de bordure */
+}
+
+/* ==========================================================================
+   BADGES
+   ========================================================================== */
+
+/* Style de base des badges */
+.badge {
+  padding: 0.375rem 0.625rem;                          /* Espacement interne */
+  font-weight: 500;                                    /* Poids moyen */
+  border-radius: 0.25rem;                              /* Coins légèrement arrondis */
+  font-size: 0.75rem;                                  /* Petite taille */
+  text-transform: uppercase;                           /* Majuscules */
+  letter-spacing: 0.5px;                               /* Espacement des lettres */
+}
+
+/* Badge succès (vert) */
+.badge-success {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%); /* Dégradé vert */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Badge danger (rouge) */
+.badge-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #e83e8c 100%); /* Dégradé rouge/rose */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Badge warning (jaune/orange) */
+.badge-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%); /* Dégradé jaune/orange */
+  color: var(--dark);                                  /* Texte foncé pour contraste */
+}
+
+/* Badge info (bleu/violet) */
+.badge-info {
+  background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%); /* Dégradé bleu/violet */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Badge primaire (violet) */
+.badge-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); /* Dégradé violet */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Badge secondaire (gris) */
+.badge-secondary {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%); /* Dégradé gris */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* ==========================================================================
+   FORMULAIRES
+   ========================================================================== */
+
+/* États de focus des contrôles de formulaire */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-color);                  /* Bordure primaire */
+  box-shadow: 0 0 0 0.2rem rgba(98, 75, 255, 0.25);   /* Effet de halo */
+}
+
+/* Libellés des formulaires */
+.form-label {
+  font-weight: 600;                                    /* Demi-gras */
+  color: var(--gray-700);                              /* Couleur grise */
+  margin-bottom: 0.5rem;                               /* Marge en dessous */
+}
+
+/* ==========================================================================
+   BOUTONS
+   ========================================================================== */
+
+/* Style de base des boutons */
+.btn {
+  font-weight: 500;                                    /* Poids moyen */
+  transition: var(--transition);                       /* Transition standard */
+  border-radius: 0.375rem;                             /* Coins arrondis */
+  padding: 0.375rem 1rem;                              /* Espacement interne */
+  font-size: 0.875rem;                                 /* Taille standard */
+  display: inline-flex;                                /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  gap: 0.375rem;                                       /* Espace entre icône et texte */
+  border: none;                                        /* Pas de bordure */
+}
+
+/* Effet au survol des boutons */
+.btn:hover {
+  transform: translateY(-1px);                         /* Légère élévation */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);         /* Ombre portée */
+}
+
+/* Effet au clic des boutons */
+.btn:active {
+  transform: translateY(0);                            /* Retour à la position initiale */
+}
+
+/* Boutons petits */
+.btn-sm {
+  padding: 0.25rem 0.625rem;                           /* Padding réduit */
+  font-size: 0.8125rem;                                /* Taille réduite */
+  border-radius: 0.25rem;                              /* Coins moins arrondis */
+}
+
+/* Boutons très petits */
+.btn-xs {
+  padding: 0.125rem 0.5rem;                            /* Padding très réduit */
+  font-size: 0.75rem;                                  /* Taille très réduite */
+  border-radius: 0.25rem;                              /* Coins moins arrondis */
+}
+
+/* Boutons grands */
+.btn-lg {
+  padding: 0.625rem 1.5rem;                            /* Padding augmenté */
+  font-size: 1rem;                                     /* Taille augmentée */
+}
+
+/* Boutons icône seule */
+.btn-icon {
+  padding: 0.375rem;                                   /* Padding égal sur tous les côtés */
+  width: 32px;                                         /* Largeur fixe */
+  height: 32px;                                        /* Hauteur fixe */
+  display: inline-flex;                                /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+}
+
+/* Boutons icône petite */
+.btn-icon-sm {
+  padding: 0.25rem;                                    /* Padding réduit */
+  width: 28px;                                         /* Largeur réduite */
+  height: 28px;                                        /* Hauteur réduite */
+}
+
+/* Bouton outline primaire */
+.btn-outline-primary {
+  color: var(--primary-color);                         /* Texte primaire */
+  border: 1px solid var(--primary-color);              /* Bordure primaire */
+  background-color: transparent;                       /* Fond transparent */
+}
+
+/* Effet au survol du bouton outline primaire */
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);              /* Fond primaire */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Bouton outline danger */
+.btn-outline-danger {
+  color: var(--danger-color);                          /* Texte rouge */
+  border: 1px solid var(--danger-color);               /* Bordure rouge */
+  background-color: transparent;                       /* Fond transparent */
+}
+
+/* Effet au survol du bouton outline danger */
+.btn-outline-danger:hover {
+  background-color: var(--danger-color);               /* Fond rouge */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Bouton outline succès */
+.btn-outline-success {
+  color: var(--success-color);                         /* Texte vert */
+  border: 1px solid var(--success-color);              /* Bordure verte */
+  background-color: transparent;                       /* Fond transparent */
+}
+
+/* Effet au survol du bouton outline succès */
+.btn-outline-success:hover {
+  background-color: var(--success-color);              /* Fond vert */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Boutons dans un groupe petit */
+.btn-group-sm .btn {
+  padding: 0.25rem 0.5rem;                             /* Padding réduit */
+  font-size: 0.8125rem;                                /* Taille réduite */
+}
+
+/* ==========================================================================
+   INDICATEUR DE CHARGEMENT
+   ========================================================================== */
+
+/* Conteneur du spinner de chargement */
+.spinner-wrapper {
+  display: flex;                                        /* Flexbox pour centrage */
+  justify-content: center;                              /* Centrage horizontal */
+  align-items: center;                                  /* Centrage vertical */
+  min-height: 200px;                                    /* Hauteur minimale */
+}
+
+/* ==========================================================================
+   NOTIFICATIONS TOAST
+   ========================================================================== */
+
+/* Conteneur des notifications toast */
+.toast-container {
+  position: fixed;                                      /* Fixe dans la fenêtre */
+  top: 1rem;                                            /* Position depuis le haut */
+  right: 1rem;                                          /* Position depuis la droite */
+  z-index: 9999;                                        /* Au-dessus de tout */
+}
+
+/* ==========================================================================
+   MODALES
+   ========================================================================== */
+
+/* Overlay de fond pour les modales */
+.modal-backdrop-modern {
+  position: fixed;                                      /* Fixe sur tout l'écran */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);                      /* Fond noir semi-transparent */
+  backdrop-filter: blur(4px);                           /* Légère flou d'arrière-plan */
+  z-index: 10500;                                       /* Niveau élevé */
+  animation: fadeIn 0.2s ease;                          /* Animation d'apparition */
+}
+
+/* Conteneur de la modale */
+.modal-modern {
+  position: fixed;                                      /* Fixe sur tout l'écran */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10501;                                       /* Au-dessus de l'overlay */
+  display: flex;                                        /* Flexbox pour centrage */
+  align-items: center;                                  /* Centrage vertical */
+  justify-content: center;                              /* Centrage horizontal */
+  padding: 1rem;                                        /* Marge de sécurité */
+  animation: fadeIn 0.3s ease;                          /* Animation d'apparition */
+}
+
+/* Animation d'apparition (fade in) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;                                         /* Complètement transparent */
+  }
+  to {
+    opacity: 1;                                         /* Complètement opaque */
+  }
+}
+
+/* Dialog de la modale */
+.modal-dialog-modern {
+  width: 100%;                                          /* Largeur pleine */
+  max-height: 90vh;                                     /* Hauteur maximale */
+  display: flex;                                        /* Flexbox pour étirement */
+  flex-direction: column;                               /* Direction verticale */
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animation de slide */
+}
+
+/* Animation de slide vers le haut */
+@keyframes slideUp {
+  from {
+    opacity: 0;                                         /* Transparent */
+    transform: translateY(20px) scale(0.95);            /* Position basse et réduit */
+  }
+  to {
+    opacity: 1;                                         /* Opaque */
+    transform: translateY(0) scale(1);                  /* Position normale et taille normale */
+  }
+}
+
+/* Tailles de modales */
+.modal-dialog-modern.modal-sm {
+  max-width: 400px;                                     /* Petite modale */
+}
+
+.modal-dialog-modern.modal-md {
+  max-width: 600px;                                     /* Modale moyenne */
+}
+
+.modal-dialog-modern.modal-lg {
+  max-width: 800px;                                     /* Grande modale */
+}
+
+.modal-dialog-modern.modal-xl {
+  max-width: 1200px;                                    /* Très grande modale */
+}
+
+/* Contenu de la modale */
+.modal-content-modern {
+  background: var(--white);                             /* Fond blanc */
+  border-radius: 1rem;                                  /* Coins très arrondis */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);          /* Ombre importante */
+  overflow: hidden;                                     /* Cache le débordement */
+  display: flex;                                        /* Flexbox pour étirement */
+  flex-direction: column;                               /* Direction verticale */
+  max-height: 100%;                                     /* Hauteur maximale */
+}
+
+/* En-tête de la modale moderne */
+.modal-header-modern {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); /* Dégradé primaire */
+  padding: 1.5rem;                                      /* Espacement interne */
+  border-bottom: none;                                  /* Pas de bordure inférieure */
+}
+
+/* Contenu de l'en-tête */
+.modal-header-content {
+  display: flex;                                        /* Flexbox pour alignement */
+  align-items: center;                                  /* Centrage vertical */
+  justify-content: space-between;                       /* Espace entre les éléments */
+}
+
+/* Titre de la modale moderne */
+.modal-title-modern {
+  font-size: 1.25rem;                                   /* Taille augmentée */
+  font-weight: 600;                                     /* Demi-gras */
+  color: var(--white);                                  /* Texte blanc */
+  margin: 0;                                            /* Pas de marge */
+  letter-spacing: -0.3px;                               /* Espacement des lettres réduit */
+}
+
+/* Bouton de fermeture de la modale */
+.modal-close-btn {
+  width: 36px;                                          /* Taille fixe */
+  height: 36px;                                        /* Taille fixe */
+  border-radius: 50%;                                  /* Cercle parfait */
+  border: none;                                        /* Pas de bordure */
+  background: rgba(255, 255, 255, 0.15);              /* Fond blanc transparent */
+  color: var(--white);                                 /* Icône blanche */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  cursor: pointer;                                     /* Curseur pointeur */
+  transition: all 0.2s ease;                           /* Transition douce */
+  backdrop-filter: blur(10px);                         /* Effet de flou */
+}
+
+/* Effet au survol du bouton de fermeture */
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);              /* Fond plus opaque */
+  transform: rotate(90deg);                           /* Rotation de 90 degrés */
+}
+
+/* Corps de la modale moderne */
+.modal-body-modern {
+  padding: 1.75rem;                                    /* Espacement interne */
+  overflow-y: auto;                                    /* Scroll vertical si nécessaire */
+  flex: 1;                                             /* Prend l'espace disponible */
+}
+
+/* Personnalisation de la scrollbar dans le corps de la modale */
+.modal-body-modern::-webkit-scrollbar {
+  width: 6px;                                          /* Largeur fine */
+}
+
+.modal-body-modern::-webkit-scrollbar-track {
+  background: var(--gray-100);                         /* Fond gris très clair */
+  border-radius: 3px;                                  /* Coins arrondis */
+}
+
+.modal-body-modern::-webkit-scrollbar-thumb {
+  background: var(--primary-color);                    /* Couleur primaire */
+  border-radius: 3px;                                  /* Coins arrondis */
+}
+
+.modal-body-modern::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);                     /* Couleur primaire sombre */
+}
+
+/* Pied de page de la modale moderne */
+.modal-footer-modern {
+  padding: 1.25rem 1.75rem;                            /* Espacement interne */
+  background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%); /* Dégradé vertical léger */
+  border-top: 1px solid var(--gray-200);               /* Séparateur */
+  display: flex;                                       /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: flex-end;                           /* Alignement à droite */
+  gap: 0.75rem;                                        /* Espace entre les boutons */
+}
+
+/* Boutons dans le pied de page de la modale */
+.modal-footer-modern .btn {
+  min-width: 100px;                                    /* Largeur minimale */
+}
+
+/* Styles de modale Bootstrap override */
+.modal-content {
+  border: none;                                        /* Pas de bordure */
+  box-shadow: var(--shadow-lg);                        /* Ombre importante */
+  border-radius: 0.5rem;                               /* Coins arrondis */
+}
+
+.modal-header {
+  background-color: var(--primary-color);              /* Fond primaire */
+  color: var(--white);                                 /* Texte blanc */
+  border-top-left-radius: 0.5rem;                      /* Coins arrondis supérieurs */
+  border-top-right-radius: 0.5rem;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);                                   /* Inverse la couleur (blanc) */
+}
+
+/* ==========================================================================
+   PAGINATION
+   ========================================================================== */
+
+/* Liens de pagination */
+.pagination .page-link {
+  color: var(--primary-color);                         /* Couleur primaire */
+  border: 1px solid var(--gray-300);                   /* Bordure grise */
+}
+
+/* Effet au survol des liens de pagination */
+.pagination .page-link:hover {
+  background-color: var(--primary-light);              /* Fond primaire clair */
+  color: var(--white);                                 /* Texte blanc */
+  border-color: var(--primary-color);                  /* Bordure primaire */
+}
+
+/* Élément actif de la pagination */
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-color);              /* Fond primaire */
+  border-color: var(--primary-color);                  /* Bordure primaire */
+}
+
+/* ==========================================================================
+   CLASSES UTILITAIRES
+   ========================================================================== */
+
+/* Texte secondaire */
+.text-muted {
+  color: var(--gray-600) !important;                   /* Couleur grise */
+}
+
+/* Fond clair */
+.bg-light {
+  background-color: var(--gray-100) !important;        /* Gris très clair */
+}
+
+/* Ombres */
+.shadow-sm {
+  box-shadow: var(--shadow-sm) !important;             /* Ombre légère */
+}
+
+.shadow {
+  box-shadow: var(--shadow) !important;                /* Ombre standard */
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg) !important;             /* Grande ombre */
+}
+
+/* ==========================================================================
+   BOUTONS D'ACTION DANS LES TABLEAUX
+   ========================================================================== */
+
+/* Boutons d'action génériques */
+.action-btn {
+  padding: 0.25rem 0.5rem;                             /* Petit padding */
+  font-size: 0.8125rem;                                /* Taille réduite */
+  border-radius: 0.25rem;                              /* Coins légèrement arrondis */
+  transition: all 0.2s ease;                           /* Transition douce */
+  border: 1px solid transparent;                       /* Bordure transparente */
+  background-color: transparent;                       /* Fond transparent */
+  color: var(--gray-600);                              /* Couleur grise */
+}
+
+/* Effet au survol des boutons d'action */
+.action-btn:hover {
+  transform: scale(1.1);                               /* Légère mise à l'échelle */
+  background-color: var(--gray-100);                   /* Fond gris très clair */
+}
+
+/* Bouton d'édition */
+.action-btn-edit:hover {
+  color: var(--primary-color);                         /* Couleur primaire */
+  border-color: var(--primary-color);                  /* Bordure primaire */
+  background-color: rgba(98, 75, 255, 0.1);            /* Fond primaire très léger */
+}
+
+/* Bouton de suppression */
+.action-btn-delete:hover {
+  color: var(--danger-color);                          /* Couleur rouge */
+  border-color: var(--danger-color);                   /* Bordure rouge */
+  background-color: rgba(220, 53, 69, 0.1);            /* Fond rouge très léger */
+}
+
+/* Bouton de visualisation */
+.action-btn-view:hover {
+  color: var(--info-color);                            /* Couleur bleue */
+  border-color: var(--info-color);                     /* Bordure bleue */
+  background-color: rgba(23, 162, 184, 0.1);           /* Fond bleu très léger */
+}
+
+/* ==========================================================================
+   EN-TÊTES DE PAGE COMPACTS
+   ========================================================================== */
+
+/* Conteneur d'en-tête de page */
+.page-header {
+  margin-bottom: 1.5rem;                               /* Marge en dessous */
+}
+
+/* Titre de l'en-tête de page */
+.page-header h2 {
+  font-size: 1.5rem;                                   /* Taille moyenne */
+  font-weight: 600;                                    /* Demi-gras */
+  margin-bottom: 0.25rem;                              /* Petite marge en dessous */
+  color: var(--gray-900);                              /* Couleur très foncée */
+}
+
+/* Description de l'en-tête de page */
+.page-header p {
+  font-size: 0.875rem;                                 /* Taille standard */
+  color: var(--gray-600);                              /* Couleur grise */
+  margin-bottom: 0;                                    /* Pas de marge en dessous */
+}
+
+/* ==========================================================================
+   SECTION DE FILTRES
+   ========================================================================== */
+
+/* Carte de filtres */
+.filter-card {
+  background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%); /* Dégradé léger */
+  border: 1px solid var(--gray-200);                   /* Bordure grise claire */
+  border-radius: 0.5rem;                               /* Coins arrondis */
+  padding: 1rem;                                       /* Espacement interne */
+  margin-bottom: 1rem;                                 /* Marge en dessous */
+}
+
+/* ==========================================================================
+   CONTRÔLES DE FORMULAIRE MODERNES
+   ========================================================================== */
+
+/* Champs de formulaire et sélecteurs */
+.form-control,
+.form-select {
+  font-size: 0.875rem;                                 /* Taille standard */
+  border-radius: 0.375rem;                             /* Coins arrondis */
+  border: 1px solid var(--gray-300);                   /* Bordure grise */
+  padding: 0.5rem 0.75rem;                             /* Espacement interne */
+}
+
+/* États de focus */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-color);                  /* Bordure primaire */
+  box-shadow: 0 0 0 3px rgba(98, 75, 255, 0.1);       /* Effet de halo subtil */
+}
+
+/* ==========================================================================
+   DESIGN RESPONSIVE
+   ========================================================================== */
+
+/* Pour les écrans de tablette et mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Sidebar caché par défaut sur mobile */
+  .sidebar {
+    width: 0;                                          /* Largeur nulle */
+    transform: translateX(-100%);                      /* Décalé hors écran */
+    transition: var(--transition);                     /* Animation de transition */
+  }
+  
+  /* Sidebar visible */
+  .sidebar.show {
+    width: 260px;                                      /* Largeur normale */
+    transform: translateX(0);                          /* Position normale */
+  }
+  
+  /* Contenu principal sans marge gauche */
+  .main-content {
+    margin-left: 0;                                    /* Pas de décalage */
+    padding: 1rem;                                     /* Padding réduit */
+  }
+  
+  /* Valeurs des cartes de stats réduites */
+  .stat-card-value {
+    font-size: 1.5rem;                                 /* Taille réduite */
+  }
+}
+
+/* ==========================================================================
+   BARRE DE DÉFILEMENT PERSONNALISÉE
+   ========================================================================== */
+
+/* Barre de défilement WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;                                          /* Largeur de la barre */
+  height: 8px;                                         /* Hauteur de la barre horizontale */
+}
+
+/* Piste de la barre de défilement */
+::-webkit-scrollbar-track {
+  background: var(--gray-200);                         /* Fond gris clair */
+}
+
+/* Curseur de la barre de défilement */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);                    /* Couleur primaire */
+  border-radius: 4px;                                  /* Coins arrondis */
+}
+
+/* Curseur au survol */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);                     /* Couleur primaire sombre */
+}
+
+/* ==========================================================================
+   PAGE DE CONNEXION
+   ========================================================================== */
+
+/* Conteneur principal de la page de connexion */
+.login-container {
+  display: flex;                                        /* Flexbox pour disposition */
+  min-height: 100vh;                                    /* Hauteur pleine page */
+  background: var(--white);                             /* Fond blanc */
+}
+
+/* Section visuelle de la page de connexion */
+.login-visual {
+  flex: 1;                                             /* Prend l'espace disponible */
+  position: relative;                                   /* Pour l'overlay */
+  background-image: url('/parking-bg.jpg');            /* Image de fond */
+  background-size: cover;                               /* Couvre toute la zone */
+  background-position: center;                          /* Centrée */
+  background-repeat: no-repeat;                         /* Pas de répétition */
+  display: none;                                        /* Caché par défaut (mobile) */
+}
+
+/* Afficher la section visuelle sur les grands écrans */
+@media (min-width: 992px) {
+  .login-visual {
+    display: block;                                     /* Affichée sur desktop */
+  }
+}
+
+/* Overlay sur l'image de fond */
+.login-visual-overlay {
+  position: absolute;                                   /* Couvre toute la section */
+  inset: 0;                                            /* Positionnement sur les 4 côtés */
+  background: linear-gradient(135deg, rgba(98, 75, 255, 0.92) 0%, rgba(98, 75, 255, 0.85) 100%); /* Dégradé violet semi-transparent */
+  backdrop-filter: blur(2px);                           /* Léger flou */
+}
+
+/* Contenu de la section visuelle */
+.login-visual-content {
+  position: relative;                                   /* Au-dessus de l'overlay */
+  z-index: 1;                                          /* Niveau supérieur */
+  height: 100%;                                        /* Hauteur pleine */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  text-align: center;                                  /* Texte centré */
+  padding: 3rem;                                       /* Espacement interne */
+  color: var(--white);                                 /* Texte blanc */
+}
+
+/* Cercle du logo sur la page de connexion */
+.login-logo-circle {
+  width: 100px;                                        /* Taille fixe */
+  height: 100px;                                       /* Taille fixe */
+  border-radius: 50%;                                  /* Cercle parfait */
+  background: rgba(255, 255, 255, 0.15);              /* Fond blanc transparent */
+  backdrop-filter: blur(10px);                         /* Effet de flou */
+  display: inline-flex;                                /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  margin-bottom: 2rem;                                 /* Marge en dessous */
+  border: 2px solid rgba(255, 255, 255, 0.3);         /* Bordure blanche transparente */
+}
+
+/* Nom de l'application sur la page de connexion */
+.login-brand {
+  font-size: 3.5rem;                                   /* Très grande taille */
+  font-weight: 700;                                    /* Texte très gras */
+  margin-bottom: 1rem;                                 /* Marge en dessous */
+  letter-spacing: -1px;                                /* Espacement des lettres réduit */
+}
+
+/* Slogan/tagline de l'application */
+.login-tagline {
+  font-size: 1.25rem;                                  /* Taille moyenne */
+  font-weight: 400;                                    /* Poids normal */
+  opacity: 0.95;                                       /* Légère transparence */
+  max-width: 400px;                                    /* Largeur maximale */
+  margin: 0 auto;                                      /* Centrage horizontal */
+}
+
+/* Section du formulaire de connexion */
+.login-form-section {
+  flex: 1;                                             /* Prend l'espace disponible */
+  display: flex;                                       /* Flexbox pour centrage */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  padding: 2rem;                                       /* Espacement interne */
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%); /* Dégradé gris très subtil */
+}
+
+/* Conteneur du formulaire de connexion */
+.login-form-wrapper {
+  width: 100%;                                         /* Largeur pleine */
+  max-width: 460px;                                    /* Largeur maximale */
+  background: var(--white);                            /* Fond blanc */
+  border-radius: 1.25rem;                              /* Coins arrondis */
+  padding: 3rem;                                       /* Espacement interne */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);         /* Ombre légère */
+}
+
+/* En-tête du formulaire de connexion */
+.login-header {
+  margin-bottom: 2.5rem;                               /* Marge importante en dessous */
+}
+
+/* Titre du formulaire de connexion */
+.login-title {
+  font-size: 2rem;                                     /* Grande taille */
+  font-weight: 700;                                    /* Texte très gras */
+  color: var(--gray-900);                              /* Couleur très foncée */
+  margin-bottom: 0.5rem;                               /* Marge en dessous */
+  letter-spacing: -0.5px;                              /* Espacement des lettres réduit */
+}
+
+/* Sous-titre du formulaire de connexion */
+.login-subtitle {
+  font-size: 0.95rem;                                  /* Taille légèrement réduite */
+  color: var(--gray-600);                              /* Couleur grise */
+  margin: 0;                                           /* Pas de marge */
+}
+
+/* Formulaire de connexion */
+.login-form {
+  margin-bottom: 2rem;                                 /* Marge en dessous */
+}
+
+/* Groupe de champs de formulaire */
+.form-group {
+  margin-bottom: 1.5rem;                               /* Marge entre les groupes */
+}
+
+/* Libellé moderne pour les champs */
+.form-label-modern {
+  display: block;                                      /* Élément bloc */
+  font-size: 0.875rem;                                 /* Taille standard */
+  font-weight: 600;                                    /* Demi-gras */
+  color: var(--gray-700);                              /* Couleur grise */
+  margin-bottom: 0.5rem;                               /* Marge en dessous */
+  letter-spacing: -0.1px;                              /* Espacement des lettres réduit */
+}
+
+/* Wrapper pour les champs avec icône */
+.input-wrapper {
+  position: relative;                                   /* Pour positionner l'icône */
+  display: flex;                                       /* Flexbox */
+  align-items: center;                                 /* Centrage vertical */
+}
+
+/* Icône dans les champs de formulaire */
+.input-icon {
+  position: absolute;                                   /* Position absolue dans le wrapper */
+  left: 1rem;                                          /* À gauche avec marge */
+  color: var(--gray-400);                              /* Couleur grise claire */
+  pointer-events: none;                                /* Non cliquable */
+  z-index: 1;                                          /* Au-dessus du champ */
+}
+
+/* Champ de formulaire moderne */
+.form-input-modern {
+  width: 100%;                                         /* Largeur pleine */
+  padding: 0.875rem 1rem 0.875rem 3rem;               /* Padding avec espace pour l'icône */
+  border: 2px solid var(--gray-200);                  /* Bordure épaisse */
+  border-radius: 0.75rem;                             /* Coins arrondis */
+  font-size: 0.9375rem;                               /* Taille légèrement augmentée */
+  color: var(--gray-800);                             /* Couleur de texte */
+  background: var(--white);                           /* Fond blanc */
+  transition: all 0.2s ease;                          /* Transition douce */
+}
+
+/* État focus du champ moderne */
+.form-input-modern:focus {
+  outline: none;                                       /* Supprime l'outline par défaut */
+  border-color: var(--primary-color);                  /* Bordure primaire */
+  box-shadow: 0 0 0 4px rgba(98, 75, 255, 0.08);     /* Effet de halo */
+}
+
+/* Placeholder des champs */
+.form-input-modern::placeholder {
+  color: var(--gray-400);                              /* Couleur grise claire */
+}
+
+/* Champ désactivé */
+.form-input-modern:disabled {
+  background: var(--gray-50);                          /* Fond gris très clair */
+  cursor: not-allowed;                                 /* Curseur interdit */
+}
+
+/* Bouton de connexion moderne */
+.btn-login-modern {
+  width: 100%;                                         /* Largeur pleine */
+  padding: 0.9375rem 1.5rem;                           /* Espacement interne */
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); /* Dégradé primaire */
+  color: var(--white);                                 /* Texte blanc */
+  border: none;                                        /* Pas de bordure */
+  border-radius: 0.75rem;                             /* Coins arrondis */
+  font-size: 0.9375rem;                               /* Taille légèrement augmentée */
+  font-weight: 600;                                    /* Demi-gras */
+  display: flex;                                       /* Flexbox pour alignement */
+  align-items: center;                                 /* Centrage vertical */
+  justify-content: center;                             /* Centrage horizontal */
+  gap: 0.5rem;                                        /* Espace entre icône et texte */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* Transition avec easing */
+  cursor: pointer;                                     /* Curseur pointeur */
+  box-shadow: 0 4px 12px rgba(98, 75, 255, 0.25);    /* Ombre violette */
+}
+
+/* Effet au survol du bouton de connexion */
+.btn-login-modern:hover:not(:disabled) {
+  transform: translateY(-2px);                         /* Légère élévation */
+  box-shadow: 0 8px 20px rgba(98, 75, 255, 0.35);    /* Ombre violette accentuée */
+}
+
+/* Effet au clic du bouton de connexion */
+.btn-login-modern:active:not(:disabled) {
+  transform: translateY(0);                            /* Retour à la position normale */
+}
+
+/* Bouton de connexion désactivé */
+.btn-login-modern:disabled {
+  opacity: 0.6;                                        /* Transparence */
+  cursor: not-allowed;                                 /* Curseur interdit */
+}
+
+/* Section des comptes de test */
+.login-test-accounts {
+  padding: 1.5rem;                                     /* Espacement interne */
+  background: linear-gradient(135deg, rgba(98, 75, 255, 0.03) 0%, rgba(98, 75, 255, 0.06) 100%); /* Dégradé primaire très léger */
+  border-radius: 0.875rem;                             /* Coins arrondis */
+  margin-bottom: 1.5rem;                               /* Marge en dessous */
+}
+
+/* Titre de la section des comptes test */
+.test-accounts-title {
+  font-size: 0.8125rem;                                /* Petite taille */
+  font-weight: 600;                                    /* Demi-gras */
+  color: var(--gray-600);                              /* Couleur grise */
+  text-transform: uppercase;                           /* Majuscules */
+  letter-spacing: 0.5px;                               /* Espacement des lettres */
+  margin-bottom: 1rem;                                 /* Marge en dessous */
+  text-align: center;                                  /* Texte centré */
+}
+
+/* Élément de compte test */
+.test-account-item {
+  display: flex;                                       /* Flexbox pour disposition */
+  justify-content: space-between;                      /* Rôle à gauche, credentials à droite */
+  align-items: center;                                 /* Centrage vertical */
+  padding: 0.625rem 0;                                /* Padding vertical */
+  font-size: 0.875rem;                                 /* Taille standard */
+}
+
+/* Séparateur entre les comptes test */
+.test-account-item:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);       /* Ligne très subtile */
+}
+
+/* Rôle du compte test */
+.test-account-role {
+  font-weight: 600;                                    /* Demi-gras */
+  color: var(--gray-700);                              /* Couleur grise */
+}
+
+/* Identifiants du compte test */
+.test-account-creds {
+  font-family: 'Courier New', monospace;              /* Police à chasse fixe */
+  font-size: 0.8125rem;                                /* Taille réduite */
+  color: var(--primary-color);                         /* Couleur primaire */
+  background: rgba(98, 75, 255, 0.08);                /* Fond primaire très léger */
+  padding: 0.25rem 0.625rem;                           /* Petit padding */
+  border-radius: 0.375rem;                             /* Coins arrondis */
+  font-weight: 500;                                    /* Poids moyen */
+}
+
+/* Pied de page de la page de connexion */
+.login-footer {
+  text-align: center;                                  /* Texte centré */
+  padding-top: 1.5rem;                                 /* Padding en haut */
+  border-top: 1px solid var(--gray-200);               /* Ligne de séparation */
+}
+
+/* Texte du pied de page */
+.login-footer p {
+  font-size: 0.8125rem;                                /* Petite taille */
+  color: var(--gray-500);                              /* Couleur grise claire */
+  margin: 0;                                           /* Pas de marge */
+}
+
+/* Media queries pour la page de connexion */
+
+/* Tablettes */
+@media (max-width: 991px) {
+  .login-form-wrapper {
+    padding: 2rem;                                     /* Padding réduit */
+  }
+  
+  .login-title {
+    font-size: 1.75rem;                                /* Taille réduite */
+  }
+}
+
+/* Mobiles */
+@media (max-width: 575px) {
+  .login-form-section {
+    padding: 1rem;                                     /* Padding réduit */
+  }
+  
+  .login-form-wrapper {
+    padding: 1.5rem;                                   /* Padding réduit */
+    border-radius: 1rem;                               /* Coins moins arrondis */
+  }
+  
+  .login-title {
+    font-size: 1.5rem;                                 /* Taille réduite */
+  }
+}
